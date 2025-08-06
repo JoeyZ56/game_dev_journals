@@ -1,0 +1,31 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# VS Code settings folder
+.vscode/
+
+# Compiled object files
+*.o
+*.obj
+
+# Compiled binary executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.pdb
+*.idb
+
+# Build directories
+build/
+bin/
+dist/
+
+# CMake build artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
