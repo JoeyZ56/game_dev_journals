@@ -1,0 +1,129 @@
+🔹 What is std:: in C++?
+
+std:: stands for Standard Namespace.
+It’s just a prefix that tells the compiler:
+
+“Hey, I’m using something from the C++ Standard Library.”
+
+Examples:
+std::cout   // console output
+std::cin    // console input
+std::string // string type
+std::endl   // end line (flushes output buffer)
+std::getline // reads full line of input
+
+---
+
+✅ The Operators:
+
+!. << → Insertion Operator
+	•	Think: pushing data INTO the output stream
+	•	Like: “put this on the console”
+
+std::cout << "Hello"; 
+// Console << "Hello"
+
+“Two hands pushing TO the console.”
+
+2. >> → Extraction Operator
+	•	Think: pulling data OUT OF the input stream
+	•	Like: “read this from the keyboard”
+
+std::cin >> name; 
+// name = Console >>
+
+Mental Summary:
+
+std::cout << "Message";
+          ^^ push OUT to screen
+
+std::cin >> variable;
+          ^^ pull IN from user
+          
+---
+
+🆚 Difference from std::cin >>
+
+👎 std::cin >> name;
+	•	Only reads one word (stops at the first space)
+	•	Useful for: numbers, single-word input
+
+✅ std::getline(std::cin, name);
+	•	Reads the whole line, including spaces
+	•	Useful for: full names, sentences, commands like "attack with sword"
+
+⸻
+
+📦 Syntax:
+
+std::string name;
+std::getline(std::cin, name);
+
+🧠 Common Confusion (Important)
+
+If you use both std::cin >> and std::getline() together, you’ll probably hit this problem:
+
+std::string name;
+int age;
+
+std::cin >> age;
+std::getline(std::cin, name); // ← this gets skipped!
+
+Why? Because:
+	•	After std::cin >> age, the user hits Enter
+	•	That leftover newline \n is still in the input buffer
+	•	So getline() sees that newline and thinks: “Oh, the line is done!”
+
+✅ Fix it with std::cin.ignore():
+
+std::cin >> age;
+std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+std::getline(std::cin, name); // ← now it works!
+
+---
+
+🔹 extern
+	•	Means: “This function exists in another file”
+	•	You’re telling the compiler:
+“Don’t look for game_loop() in this file (main.cpp), just trust me — it’s defined somewhere else during compilation.”
+	•	Without extern, the compiler will complain:
+“I don’t know what game_loop is!”
+
+---
+
+🔹 void
+	•	This means the function does not return anything
+	•	It just performs actions like printing, changing data, etc.
+
+    🔹 (Player& player)
+---
+
+This part is super important and very C++-specific.
+
+🔸 Player:
+	•	This is the data type of the argument
+	•	It refers to your Player struct (defined in player.h)
+
+🔸 &:
+	•	This is a reference, meaning:
+	•	You’re not passing a copy of the player
+	•	You’re passing the original player, so changes inside game_loop() (like taking damage or leveling up) affect the real one
+
+🔸 player:
+	•	The name of the variable that will be used inside game_loop
+---
+
+🧱 What is a struct in C++?
+
+A struct (short for structure) is a custom data type that lets you group related variables together under one name.
+
+🔥 Bonus: Structs can even hold functions (methods)
+
+struct Player {
+    std::string name;
+    int health;
+
+    void printStatus() {
+        std::cout << name << " has " << health << " HP.\n";
+    }
+};
