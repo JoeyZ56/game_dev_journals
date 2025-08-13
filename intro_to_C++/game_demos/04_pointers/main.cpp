@@ -1,10 +1,17 @@
 #include "player.h"
 
-int main()
+int main() 
 {
-    Player character = {"Halevar", "Warrior", 10, 100, 50, 2, 100, 50};
+    Player hero{"Halevar", 100};
 
-    initPlayer(character);
+    //create a pointer to hero
+    Player* ptr = &hero;
 
-    return 0;
+    //Access via pointer directly
+    ptr->health -= 20; //take 20 damage
+
+    // Pass pointer to function
+    printPlayerInfo(ptr);
+
+    return 0; //end program
 }
